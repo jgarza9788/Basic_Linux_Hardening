@@ -130,10 +130,30 @@ sudo ufw app info OpenSSH        # Info about specific app
 ### Logging
 ```bash
 sudo ufw logging on              # Enable logging
-sudo ufw logging off             # Disable logging
+#sudo ufw logging off             # Disable logging
 sudo ufw logging medium          # Set log level (low, medium, high)
 tail -f /var/log/ufw.log         # View firewall logs
 ```
+
+### more Logging
+```bash
+# View firewall logs in real-time
+sudo tail -f /var/log/ufw.log
+
+# Filter for BLOCK events only
+sudo grep "UFW BLOCK" /var/log/ufw.log | tail -20
+
+# See what's being blocked with more detail
+sudo journalctl -u ufw -f
+
+# Check which ports your apps are trying to use
+sudo netstat -tulpn | grep LISTEN
+
+# Or with ss (modern alternative)
+sudo ss -tulpn | grep LISTEN
+```
+
+
 
 ### Rate Limiting
 ```bash

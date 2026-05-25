@@ -73,6 +73,8 @@ ok "UFW is installed" "($(ufw version | head -1))"
 section "🔄" "Resetting UFW"
 ufw --force reset &>/dev/null
 ok "Reset to defaults"
+ufw logging medium &>/dev/null
+ok "Logging set to" "medium"
 
 # ─── Default policies ─────────────────────────────────────────────────────────
 section "🛡️ " "Default Policies"
